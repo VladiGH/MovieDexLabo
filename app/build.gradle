@@ -23,8 +23,6 @@ android {
         Properties properties = new Properties()
         properties.load(project.rootProject.file("local.properties").newDataInputStream())
         def ombdApiKey = properties.getProperty("ombd_api_key")
-        it.buildConfigField 'String', "OMBD_API_KEY", ombdApiKey
-        it.resValue 'string', "api_key", ombdApiKey
     }
     //TODO AGREGAR A LOCAL.PROPIERTIES LA OMDB_API_KEY
 }

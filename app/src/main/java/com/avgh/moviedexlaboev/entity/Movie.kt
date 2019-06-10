@@ -1,4 +1,4 @@
-package com.avgh.moviedexlaboev.database.entity
+package com.avgh.moviedexlaboev.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
