@@ -29,6 +29,12 @@ class MovieViewModel(val app: Application) : AndroidViewModel(app) {
 
     fun getAll(): LiveData<List<Movie>> = repository.getAllfromRoomDB()
 
+    fun deleteAll() {
+        CoroutineScope(Dispatchers.IO).launch {
+            repository.deleteAll()
+        }
+    }
+
     fun getMovieByName(name: String): LiveData<List<Movie>> = repository.getMovieByName(name)
 
     fun apiGetMoviesByTitle(name: String){

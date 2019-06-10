@@ -19,4 +19,7 @@ interface MovieDao {
     //TODO: modificar para que la querie sera por coincidencia
     @Query("select * from Movie where Title like :name")
     fun searchMovieByName(name: String): LiveData<List<Movie>>
+
+    @Query("DELETE from Movie")
+    suspend fun deleteAll()
 }

@@ -3,6 +3,7 @@ package com.avgh.moviedexlaboev
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.ActionMode
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -43,22 +44,27 @@ class MainActivity : AppCompatActivity() {
                 })
             }
         }
-    }
-
-    override fun onDestroy() {
-
-        //TODO: Deberia guardar en la base de datos.... pero no lo hace xd
-        for(movie in viewModelMovie.getMovieListPreview().value?: emptyList<MoviePreview>()){
-            viewModelMovie.apiGetMoviesByTitle(movie.Title)
-            viewModelMovie.getMovieFulled().observe(this, Observer {
-                Log.v("destroy", it.Title)
-                viewModelMovie.insert(it)
-            })
+        bt_guardarEnRoom.setOnClickListener(){
+            viewModelMovie.deleteAll()
+            for(movie in viewModelMovie.getMovieListPreview().value?: emptyList<MoviePreview>()){
+                viewModelMovie.apiGetMoviesByTitle(movie.Title)
+                viewModelMovie.getMovieFulled().observe(this, Observer {
+                    viewModelMovie.insert(it)
+                    Log.v("insert", it.Title)
+                })
+            }
         }
-        super.onDestroy()
     }
-
     private fun nuevaActivityPelicula(movie: MoviePreview) {
-        //TODO: hacerClickListener
+        viewModelMovie.apiGetMoviesByTitle(movie.Title)
+        viewModelMovie.getMovieFulled().observe(this, Observer {movie->
+            Log.v("movieCompleta", movie.Title)
+            Log.v("movieCompleta", movie.Year)
+            Log.v("movieCompleta", movie.Released)
+            Log.v("movieCompleta", movie.Runtime)
+            Log.v("movieCompleta", movie.Genre)
+            Log.v("movieCompleta", movie.Actors)
+
+        })
     }
 }
