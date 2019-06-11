@@ -32,6 +32,7 @@ class movieAdapter(var movies: List<MoviePreview>, val clickListener: (MoviePrev
         for(movie in newMovieList){
             list.add(MoviePreview(movie.Title, movie.Year, movie.imdbID, "", movie.Poster))
         }
+        movies= list
         notifyDataSetChanged()
     }
 
@@ -42,6 +43,9 @@ class movieAdapter(var movies: List<MoviePreview>, val clickListener: (MoviePrev
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(movie_image_cv)
             movie_title_cv.text = movie.Title
+            movie_imdbID.text= movie.imdbID
+            movie_type.text= movie.Type
+            movie_year.text= movie.Year
             this.setOnClickListener { clickListener(movie) }
         }
     }

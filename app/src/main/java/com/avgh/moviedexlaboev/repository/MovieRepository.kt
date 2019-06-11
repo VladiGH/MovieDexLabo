@@ -24,6 +24,10 @@ class MovieRepository(private val movieDao: MovieDao, private val api:API) {
     fun apiGetMoviesByName(name: String): Deferred<Response<OmbdMovieResponse>> {
         return api.getMoviesByName(name);
     }
+    @WorkerThread
+    suspend fun deleteAll(){
+        movieDao.deleteAll()
+    }
 
     //todo: faltaria lo de retrofit
 }
