@@ -1,16 +1,15 @@
-package com.avgh.moviedexlaboev
+package com.avgh.moviedexlaboev.Activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.ActionMode
-import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.avgh.moviedexlaboev.Adapters.movieAdapter
-import com.avgh.moviedexlaboev.entity.Movie
+import com.avgh.moviedexlaboev.R
 import com.avgh.moviedexlaboev.entity.MoviePreview
 import com.avgh.moviedexlaboev.viewmodel.MovieViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -56,15 +55,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun nuevaActivityPelicula(movie: MoviePreview) {
-        viewModelMovie.apiGetMoviesByTitle(movie.Title)
-        viewModelMovie.getMovieFulled().observe(this, Observer {movie->
-            Log.v("movieCompleta", movie.Title)
-            Log.v("movieCompleta", movie.Year)
-            Log.v("movieCompleta", movie.Released)
-            Log.v("movieCompleta", movie.Runtime)
-            Log.v("movieCompleta", movie.Genre)
-            Log.v("movieCompleta", movie.Actors)
-
-        })
+        var movieBundle = Bundle()
+        movieBundle.putParcelable("MOVIE",movie)
+        startActivity(Intent(this, movieDetailActivity::class.java).putExtra("bundle", movieBundle))
     }
 }

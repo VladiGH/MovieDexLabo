@@ -1,6 +1,7 @@
 package com.avgh.moviedexlaboev.viewmodel
 
 import android.app.Application
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -53,13 +54,15 @@ class MovieViewModel(val app: Application) : AndroidViewModel(app) {
 
     fun apiGetMoviesByName(name: String){
         CoroutineScope(Dispatchers.IO).launch {
+            Log.v("api", "llego1")
             val response=repository.apiGetMoviesByName(name).await()
             if(response.isSuccessful){
                 if(response.code()==200){
                     movieslist.postValue(response.body()?.Search?.toMutableList()?:arrayListOf(MoviePreview()))
                 }
             }else{
-                Toast.makeText(app, "Ocurrio un error", Toast.LENGTH_LONG).show()
+                Log.v("api", "llego2")
+                //Toast.makeText(app, "Ocurrio un error", Toast.LENGTH_LONG).show()
             }
         }
     }
