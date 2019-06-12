@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         moviesAdapter= movieAdapter(ArrayList<MoviePreview>(), { movie: MoviePreview ->nuevaActivityPelicula(movie)})
         rv_list.apply {
             adapter= moviesAdapter
-            layoutManager =  StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
+            layoutManager =  StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL);
         }
 
         viewModelMovie.getAll().observe(this, Observer {

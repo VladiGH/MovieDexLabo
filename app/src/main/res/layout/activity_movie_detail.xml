@@ -52,7 +52,7 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Año:"
+                        android:text="Año          :"
                         android:textSize="18sp"
                         android:textColor="#F7F3F3"
                         android:layout_marginTop="16dp"
@@ -79,7 +79,7 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Duracion:"
+                        android:text="Duracion :"
                         android:textSize="18sp"
                         android:textColor="#F7F3F3"
                         android:layout_marginTop="16dp"
@@ -107,7 +107,7 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Genero:"
+                        android:text="Genero    :"
                         android:layout_marginTop="16dp"
                         android:layout_marginLeft="16dp"
                         android:textSize="18sp"
@@ -124,6 +124,8 @@
                         android:textSize="18sp"
                         android:textColor="#F7F3F3"
                         android:layout_marginStart="16dp"
+                        android:layout_weight="5
+"
                 />
             </LinearLayout>
             <LinearLayout
@@ -134,7 +136,7 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Director:"
+                        android:text="Director   :"
                         android:layout_marginTop="16dp"
                         android:textSize="18sp"
                         android:textColor="#F7F3F3"
@@ -161,7 +163,7 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Actores:"
+                        android:text="Actores   :"
                         android:layout_marginTop="16dp"
                         android:textSize="18sp"
                         android:textColor="#F7F3F3"
@@ -188,7 +190,7 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Plot:"
+                        android:text="Plot          :"
                         android:layout_marginTop="16dp"
                         android:textSize="18sp"
                         android:textColor="#F7F3F3"
