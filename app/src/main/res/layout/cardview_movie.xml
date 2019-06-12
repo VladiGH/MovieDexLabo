@@ -5,7 +5,7 @@
                                    android:layout_height="wrap_content"
                                    android:layout_margin="8dp"
                                    app:cardCornerRadius="5dp"
-                                   app:cardElevation="10dp">
+                                   app:cardElevation="10dp" app:cardBackgroundColor="#D1CCCC">
 
     <RelativeLayout
             android:layout_width="wrap_content"
@@ -15,7 +15,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/ic_launcher_background"/>
         <TextView
                 android:id="@+id/movie_title_cv"
                 android:layout_width="wrap_content"
@@ -29,7 +29,7 @@
                 android:lines="1"
                 android:padding="8dp"
                 android:textColor="#fff"
-                android:textSize="25sp" />
+                android:textSize="18sp"/>
 
         <TextView
                 android:id="@+id/movie_imdbID"
@@ -43,7 +43,7 @@
                 android:gravity="end"
                 android:padding="8dp"
                 android:textColor="#fff"
-                android:textSize="25sp" />
+                android:textSize="18sp"/>
 
         <LinearLayout
                 android:id="@+id/data_container_ll_cv"
@@ -66,7 +66,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:gravity="end" />
+                    android:gravity="end"/>
 
         </LinearLayout>
 
