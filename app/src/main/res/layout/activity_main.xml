@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,66 +7,53 @@
     android:background="#2d2a2a"
     tools:context=".Activities.MainActivity">
 
-
+<LinearLayout android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/linear">
     <EditText
-        android:id="@+id/et_search"
-        android:layout_width="263dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginLeft="44dp"
-        android:layout_marginTop="80dp"
-        android:textColor="#C6E6DE"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/et_search"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:layout_marginLeft="44dp"
+
+            android:textColor="#C6E6DE"
+    />
 
     <Button
-        android:id="@+id/bt_search"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@drawable/ic_search_black_24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.263"
-        app:layout_constraintStart_toEndOf="@+id/et_search"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/bt_search"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_search_black_24dp"/>
+
+</LinearLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_list"
-        android:layout_width="371dp"
-        android:layout_height="405dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="10dp"
-        android:background="#2d2a2a"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+            android:id="@+id/rv_list"
+            android:layout_width="371dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="10dp"
+            android:background="#2d2a2a"
+            android:layout_below="@+id/linear"
+/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/bt_guardarEnRoom"
-        android:layout_width="wrap_content"
-        android:layout_height="55dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+            android:id="@+id/bt_guardarEnRoom"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:layout_marginBottom="21dp"
+            android:clickable="true"
+            app:srcCompat="@android:drawable/btn_star_big_on" android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/rv_list"
+            android:layout_alignEnd="@+id/rv_list" android:layout_marginRight="138dp" android:layout_marginEnd="138dp"
+            android:layout_alignParentStart="true" android:layout_marginLeft="185dp" android:layout_marginStart="185dp"
+            android:layout_alignParentLeft="true"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
