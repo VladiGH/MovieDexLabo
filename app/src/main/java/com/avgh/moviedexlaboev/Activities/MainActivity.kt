@@ -1,15 +1,20 @@
 package com.avgh.moviedexlaboev.Activities
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.avgh.moviedexlaboev.Adapters.movieAdapter
 import com.avgh.moviedexlaboev.R
+import com.avgh.moviedexlaboev.constantes.AppConstants
 import com.avgh.moviedexlaboev.entity.MoviePreview
 import com.avgh.moviedexlaboev.viewmodel.MovieViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -35,13 +40,18 @@ class MainActivity : AppCompatActivity() {
         })
 
         bt_search.setOnClickListener {
-            val movieNameQuery = et_search.text.toString()
-            if (movieNameQuery.isNotEmpty() && movieNameQuery.isNotBlank()) {
-                viewModelMovie.apiGetMoviesByName(movieNameQuery)
-                viewModelMovie.getMovieListPreview().observe(this, Observer { lista ->
-                    moviesAdapter.changeDataSet(lista)
-                })
+            if(isNetworkConnected()) {
+                val movieNameQuery = et_search.text.toString()
+                if (movieNameQuery.isNotEmpty() && movieNameQuery.isNotBlank()) {
+                    viewModelMovie.apiGetMoviesByName(movieNameQuery)
+                    viewModelMovie.getMovieListPreview().observe(this, Observer { lista ->
+                        moviesAdapter.changeDataSet(lista)
+                    })
+                }
+            }else{
+                Toast.makeText(this, "No hay conexion", Toast.LENGTH_LONG).show()
             }
+
         }
         bt_guardarEnRoom.setOnClickListener(){
             viewModelMovie.deleteAll()
@@ -55,8 +65,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun nuevaActivityPelicula(movie: MoviePreview) {
-        var movieBundle = Bundle()
-        movieBundle.putParcelable("MOVIE",movie)
-        startActivity(Intent(this, movieDetailActivity::class.java).putExtra("bundle", movieBundle))
+        if(isNetworkConnected()){
+            var movieBundle = Bundle()
+            movieBundle.putParcelable("MOVIE",movie)
+            startActivity(Intent(this, movieDetailActivity::class.java).putExtra("bundle", movieBundle))
+        }else{
+            Toast.makeText(this, "No hay conexion", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    fun isNetworkConnected(): Boolean {
+        val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+
+        return cm!!.activeNetworkInfo != null // return true =(connected),false=(not connected)
     }
 }
