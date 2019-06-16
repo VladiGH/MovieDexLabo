@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.avgh.moviedexlaboev.database.RoomDB
 import com.avgh.moviedexlaboev.entity.Movie
 import com.avgh.moviedexlaboev.entity.MoviePreview
@@ -20,6 +21,7 @@ class MovieViewModel(val app: Application) : AndroidViewModel(app) {
     private val repository: MovieRepository
     private val movieResult = MutableLiveData<Movie>()
     private val movieslist = MutableLiveData<MutableList<MoviePreview>>()
+    private val query = MutableLiveData<String>()
     init{
         val movieDao = RoomDB.getDatabase(app).movieDao()
         repository = MovieRepository(movieDao, Interceptor.ombdApi)
@@ -52,7 +54,7 @@ class MovieViewModel(val app: Application) : AndroidViewModel(app) {
     }
     fun getMovieFulled(): LiveData<Movie> = movieResult
 
-    fun apiGetMoviesByName(name: String){
+    private fun apiGetMoviesByName(name: String){
         CoroutineScope(Dispatchers.IO).launch {
             Log.v("api", "llego1")
             val response=repository.apiGetMoviesByName(name).await()
@@ -61,11 +63,21 @@ class MovieViewModel(val app: Application) : AndroidViewModel(app) {
                     movieslist.postValue(response.body()?.Search?.toMutableList()?:arrayListOf(MoviePreview()))
                 }
             }else{
-                Log.v("api", "llego2")
                 //Toast.makeText(app, "Ocurrio un error", Toast.LENGTH_LONG).show()
             }
         }
     }
 
-    fun getMovieListPreview(): LiveData<MutableList<MoviePreview>> = movieslist
+    fun getMovieListPreview(name: String): LiveData<MutableList<MoviePreview>>{
+        apiGetMoviesByName(name)
+        return movieslist
+    }
+    fun searchMoviesByName(name: String){
+        query.value = name
+    }
+
+    val pelisResult: LiveData<MutableList<MoviePreview>> = Transformations.switchMap(
+            query,
+            ::getMovieListPreview
+    )
 }

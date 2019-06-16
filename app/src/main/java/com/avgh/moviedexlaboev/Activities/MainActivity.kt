@@ -43,8 +43,8 @@ class MainActivity : AppCompatActivity() {
             if(isNetworkConnected()) {
                 val movieNameQuery = et_search.text.toString()
                 if (movieNameQuery.isNotEmpty() && movieNameQuery.isNotBlank()) {
-                    viewModelMovie.apiGetMoviesByName(movieNameQuery)
-                    viewModelMovie.getMovieListPreview().observe(this, Observer { lista ->
+                    viewModelMovie.searchMoviesByName(movieNameQuery)
+                    viewModelMovie.pelisResult.observe(this, Observer { lista ->
                         moviesAdapter.changeDataSet(lista)
                     })
                 }
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         }
         bt_guardarEnRoom.setOnClickListener(){
             viewModelMovie.deleteAll()
-            for(movie in viewModelMovie.getMovieListPreview().value?: emptyList<MoviePreview>()){
+            for(movie in viewModelMovie.pelisResult.value?: emptyList<MoviePreview>()){
                 viewModelMovie.apiGetMoviesByTitle(movie.Title)
                 viewModelMovie.getMovieFulled().observe(this, Observer {
                     viewModelMovie.insert(it)
